@@ -31,7 +31,7 @@ The main objectives of this project are:
 2. Estimate battery State of Health (SOH).
 3. Calculate Remaining Useful Life (RUL) using an End-of-Life capacity threshold.
 4. Develop a baseline regression model for RUL prediction.
-5. Develop an XGBoost regression model for improved prediction.
+5. Develop an XGBoost regression model for RUL prediction.
 6. Evaluate model performance using MAE, RMSE, and R².
 7. Test model generalization across different batteries.
 8. Identify important battery-related features influencing RUL predictions.
@@ -44,7 +44,7 @@ This project uses the **NASA Li-ion Battery Aging Dataset** from the NASA Progno
 
 The dataset contains measurements from lithium-ion battery aging experiments, including charging, discharging, voltage, current, temperature, and capacity measurements.
 
-The dataset defines End of Life (EOL) at approximately **30% capacity degradation**, corresponding to a decrease from the rated 2 Ah capacity to approximately 1.4 Ah.
+The NASA dataset defines End of Life (EOL) at approximately **30% capacity degradation**, corresponding to a decrease from the rated 2 Ah capacity to approximately 1.4 Ah.
 
 ### Dataset Source
 
@@ -96,22 +96,20 @@ Time-Based Data Split
 Linear Regression Baseline
         ↓
 XGBoost Regression
-        ↓
-Cross-Battery Evaluation
+
 Battery Health Analysis
 
 Battery capacity is analyzed across discharge cycles to understand degradation behavior.
 
 State of Health (SOH) is calculated relative to the initial observed battery capacity:
-
 SOH (%) = (Current Capacity / Initial Capacity) × 100
-
 The project visualizes:
 
 Battery capacity degradation
 SOH degradation
 EOL threshold
 Battery cycle progression
+
 Feature Engineering
 
 Features are extracted from discharge-cycle measurements.
@@ -133,13 +131,9 @@ Remaining Useful Life Calculation
 RUL is defined as the number of remaining cycles until the battery reaches the End-of-Life capacity threshold.
 
 For this project:
-
 EOL Capacity = 1.4 Ah
-
 RUL is calculated as:
-
 RUL = EOL Cycle - Current Cycle
-
 This produces a cycle-based prediction target for the regression models.
 
 Machine Learning Models
@@ -165,7 +159,7 @@ Feature subsampling
 Squared-error regression objective
 Model Evaluation
 
-The models are evaluated using:
+The models are evaluated using the following metrics:
 
 Mean Absolute Error (MAE)
 
@@ -211,6 +205,7 @@ XGBoost
 Joblib
 Google Colab
 GitHub
+
 Repository Structure
 ev-battery-rul-prediction/
 │
@@ -231,17 +226,12 @@ Download the NASA Li-ion Battery Aging Dataset from the official NASA source.
 
 2. Open the Notebook
 
-Open:
-
-EV_Battery_RUL_Prediction.ipynb
-
-using Google Colab or Jupyter Notebook.
+Open:EV_Battery_RUL_Prediction.ipynb
 
 3. Install Dependencies
 
-Install the required Python packages:
+Install the required Python packages:pip install -r requirements.txt
 
-pip install -r requirements.txt
 4. Load the Dataset
 
 Place the extracted NASA battery files in the appropriate working directory and update the file paths in the notebook if necessary.
@@ -257,6 +247,8 @@ Model training
 Model evaluation
 Cross-battery predictions
 Feature importance analysis
+
+
 Results
 
 The project compares Linear Regression and XGBoost Regression using:
@@ -306,7 +298,14 @@ MSc Data Science
 University of Europe for Applied Sciences, Germany
 
 GitHub: tharunkumarvg-lab
+### Important
+
+When you paste this into GitHub, **paste the entire block including all the `##` headings and the ``` marks**. GitHub will then render it properly.
+
+Your previous version had the `Methodology` code block swallowing everything after it. **This version fixes that.**
+        ↓
+Cross-Battery Evaluation
         ↓
 Feature Importance Analysis
         ↓
-Prediction Error Analysis****
+Prediction Error Analysis
